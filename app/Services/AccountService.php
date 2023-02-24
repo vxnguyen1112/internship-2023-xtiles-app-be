@@ -42,5 +42,7 @@ class AccountService
         auth()->logout();
         return ['message' => 'User successfully signed out'];
     }
-
+    public function refresh() {
+        return $this->createNewToken(auth()->refresh());
+    }
 }

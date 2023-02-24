@@ -33,6 +33,6 @@ class LoginRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $validator_errors = (new ValidationException($validator))->errors();
-        throw new HttpResponseException(ResponseHelper::send([],Status::NG, HttpCode::BAD_REQUEST, reset($validator_errors)[0]));
+        throw new HttpResponseException(ResponseHelper::send([],Status::NOT_GOOD, HttpCode::BAD_REQUEST, reset($validator_errors)[0]));
     }
 }

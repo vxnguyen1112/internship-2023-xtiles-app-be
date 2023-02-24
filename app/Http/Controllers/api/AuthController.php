@@ -34,12 +34,15 @@ class AuthController extends Controller
         {
             return  ResponseHelper::send($result["data"],statusCode:HttpCode::CREATED);
         }else {
-            return ResponseHelper::send([], Status::NG, HttpCode::BAD_REQUEST, $result["data"]);
+            return ResponseHelper::send([], Status::NOT_GOOD, HttpCode::BAD_REQUEST, $result["data"]);
         }
     }
     public function logout() {
         $result=$this->accountService->logout();
         return  ResponseHelper::send($result,statusCode:HttpCode::OK);
-
+    }
+    public function refresh() {
+        $result= $this->accountService->refresh();
+        return  ResponseHelper::send($result["data"],statusCode:HttpCode::CREATED);
     }
 }
