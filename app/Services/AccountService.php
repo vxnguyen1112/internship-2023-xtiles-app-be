@@ -38,4 +38,9 @@ class AccountService
         $results["status"]=HttpCode::CREATED;
         return $results;
     }
+    public function logout() {
+        auth()->logout();
+        return ['message' => 'User successfully signed out'];
+    }
+
 }

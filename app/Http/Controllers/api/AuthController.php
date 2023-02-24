@@ -37,4 +37,9 @@ class AuthController extends Controller
             return ResponseHelper::send([], Status::NG, HttpCode::BAD_REQUEST, $result["data"]);
         }
     }
+    public function logout() {
+        $result=$this->accountService->logout();
+        return  ResponseHelper::send($result,statusCode:HttpCode::OK);
+
+    }
 }
