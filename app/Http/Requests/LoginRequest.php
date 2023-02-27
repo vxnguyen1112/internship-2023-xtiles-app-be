@@ -9,19 +9,23 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Log;
 
-class StoreRegisterRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
     public function authorize()
     {
         return true;
     }
+
     public function rules()
     {
         return [
-            'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:accounts',
+            'email' => 'required|email',
             'password' => 'required|string|min:6',
         ];
     }
@@ -29,6 +33,6 @@ class StoreRegisterRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $validator_errors = (new ValidationException($validator))->errors();
-        throw new HttpResponseException(ResponseHelper::send([],Status::NOT_GOOD, HttpCode::BAD_REQUEST, reset($validator_errors)[0]));
+        throw new HttpResponseException(ResponseHelper::send([],Status::NG, HttpCode::BAD_REQUEST, reset($validator_errors)[0]));
     }
 }

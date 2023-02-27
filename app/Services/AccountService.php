@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+use App\Helpers\HttpCode;
 use App\Repositories\AccountRepository;
 
 class AccountService
@@ -17,5 +18,24 @@ class AccountService
     public function store($data)
     {
         return $this->accountRepository->create($data);
+    }
+    public function login($request){
+        if (! $token = auth()->attempt($request)) {
+            return ['data' => 'Unauthorized',
+                'status'=>HttpCode::BAD_REQUEST
+            ];
+        }
+
+        return $this->createNewToken($token);
+    }
+    protected function createNewToken($token){
+        $results["data"]=[
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'account' => auth()->user()
+        ];
+        $results["status"]=HttpCode::CREATED;
+        return $results;
     }
 }
