@@ -19,7 +19,6 @@ class AuthController extends Controller
 {
     protected $accountService;
     public function __construct(AccountService $accountService ) {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
         $this->accountService=$accountService;
     }
     public function register(StoreRegisterRequest $request) {
@@ -44,5 +43,8 @@ class AuthController extends Controller
     public function refresh() {
         $result= $this->accountService->refresh();
         return  ResponseHelper::send($result["data"],statusCode:HttpCode::CREATED);
+    }
+    public function userProfile() {
+        return ResponseHelper::send(auth()->user(),statusCode:HttpCode::CREATED);
     }
 }

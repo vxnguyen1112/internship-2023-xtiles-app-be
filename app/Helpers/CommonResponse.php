@@ -11,6 +11,13 @@ class CommonResponse {
             ErrorCodeHelper::NOT_FOUND
         );
     }
+    public static function deleteSuccessfullyResponse() {
+        return ResponseHelper::send(
+            ['message'=>'Delete successfully'],
+            Status::OK,
+            HttpCode::OK,
+        );
+    }
 
     public static function existedResponse($type) {
         return ResponseHelper::send(
