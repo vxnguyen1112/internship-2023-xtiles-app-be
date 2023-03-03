@@ -23,13 +23,13 @@
 
         public function getPageById($id)
         {
-            return ResponseHelper::send($this->pageService->getPageById($id), statusCode: HttpCode::CREATED);
+            return ResponseHelper::send($this->pageService->getPageById($id), statusCode: HttpCode::OK);
         }
 
         public function getPageByQuery(Request $request)
         {
             $query = $request->only(['name', 'document_id']);
-            return ResponseHelper::send($this->pageService->getPageByQuery($query), statusCode: HttpCode::CREATED);
+            return ResponseHelper::send($this->pageService->getPageByQuery($query), statusCode: HttpCode::OK);
         }
 
         public function store(StorePageRequest $request)

@@ -15,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
     }
-    
+
     public function boot()
     {
         $this->app->bind(
@@ -35,10 +35,18 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Eloquent\PageRepositoryEloquent::class
         );
 
-        $this->app->bind(ContentRepository::class,
-            ContentRepositoryEloquent::class);
+        $this->app->bind(
+            ContentRepository::class,
+            ContentRepositoryEloquent::class
+        );
 
-        $this->app->bind(CommentRepository::class,
-        CommentRepositoryEloquent::class);
+        $this->app->bind(
+            CommentRepository::class,
+            CommentRepositoryEloquent::class
+        );
+        $this->app->bind(
+            \App\Repositories\WorkspaceRepository::class,
+            \App\Repositories\Eloquent\WorkspaceRepositoryEloquent::class
+        );
     }
 }

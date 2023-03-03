@@ -7,5 +7,8 @@
     interface DocumentRepository extends RepositoryInterface
     {
         public function checkDocumentById($id);
+
         public function getDocumentPersonal($idAccount);
+
+        public function deleteDocumentByWorkspace($workspace_Id);
     }
