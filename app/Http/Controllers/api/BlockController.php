@@ -6,6 +6,7 @@ use App\Helpers\CommonResponse;
 use App\Helpers\HttpCode;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBlockRequest;
 use App\Services\BlockService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -16,17 +17,28 @@ class BlockController extends Controller
 
     public function __construct(BlockService $blockService)
     {
-        $this->middleware('auth:api');
         $this->blockService = $blockService;
     }
 
-    public function index()
+    public function getBlockByPage($pageId)
     {
-        $result = $this->blockService->index();
+        $result = $this->blockService->getBlockByPage($pageId);
+        if (is_null($result)) {
+            return CommonResponse::notFoundResponse();
+        }
         return ResponseHelper::send($result);
     }
 
-    public function store(Request $request)
+    public function getBlockById($id)
+    {
+        $result = $this->blockService->getBlockById($id);
+        if (is_null($result)) {
+            return CommonResponse::notFoundResponse();
+        }
+        return ResponseHelper::send($result);
+    }
+
+    public function store(StoreBlockRequest $request)
     {
         $result = $this->blockService->store($request->all());
         return ResponseHelper::send($result, statusCode: HttpCode::CREATED);
@@ -47,6 +59,6 @@ class BlockController extends Controller
         if (is_null($result)) {
             return CommonResponse::notFoundResponse();
         }
-        return ResponseHelper::send($result);
+        return CommonResponse::deleteSuccessfullyResponse();
     }
 }
