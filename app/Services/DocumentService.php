@@ -37,7 +37,6 @@
         {
             return $this->update(['is_deleted' => true], $id);
         }
-
         public function getDocumentPersonal()
         {
             $user = auth()->user();

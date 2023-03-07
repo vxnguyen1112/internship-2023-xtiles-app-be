@@ -26,5 +26,9 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\DocumentRepository::class,
             \App\Repositories\Eloquent\DocumentRepositoryEloquent::class
         );
+        $this->app->bind(
+            \App\Repositories\PageRepository::class,
+            \App\Repositories\Eloquent\PageRepositoryEloquent::class
+        );
     }
 }

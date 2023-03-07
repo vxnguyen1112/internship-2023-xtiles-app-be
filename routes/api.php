@@ -1,6 +1,7 @@
 <?php
 
     use App\Http\Controllers\api\BlockController;
+    use App\Http\Controllers\api\PageController;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\api\AuthController;
@@ -46,4 +47,10 @@
         Route::post('/document', [DocumentController::class, 'store']);
         Route::put('/document/{id}', [DocumentController::class, 'update']);
         Route::delete('/document/{id}', [DocumentController::class, 'destroy']);
+
+        Route::get('/page', [PageController::class, 'getPageByQuery']);
+        Route::get('/page/{id}', [PageController::class, 'getPageById']);
+        Route::post('/page', [PageController::class, 'store']);
+        Route::put('/page/{id}', [PageController::class, 'update']);
+        Route::delete('/page/{id}', [PageController::class, 'destroy']);
     });
