@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use App\Repositories\BlockRepository;
 use App\Repositories\Eloquent\BlockRepositoryEloquent;
+use App\Repositories\CommentRepository;
+use App\Repositories\ContentRepository;
+use App\Repositories\Eloquent\CommentRepositoryEloquent;
+use App\Repositories\Eloquent\ContentRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -11,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
     }
-
+    
     public function boot()
     {
         $this->app->bind(
@@ -30,5 +34,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\PageRepository::class,
             \App\Repositories\Eloquent\PageRepositoryEloquent::class
         );
+
+        $this->app->bind(ContentRepository::class,
+            ContentRepositoryEloquent::class);
+
+        $this->app->bind(CommentRepository::class,
+        CommentRepositoryEloquent::class);
     }
 }
