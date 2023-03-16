@@ -48,6 +48,7 @@
 
         Route::get('/document', [DocumentController::class, 'getDocumentByQuery']);
         Route::get('/document/personal', [DocumentController::class, 'getDocumentPersonal']);
+        Route::get('/document/{id}/all', [DocumentController::class, 'getAllDataDocument']);
         Route::get('/document/favourite', [FavouriteDocumentController::class, 'getAllFavouriteOfAccount']);
         Route::get('/document/{id}', [DocumentController::class, 'getDocumentById']);
         Route::post('/document', [DocumentController::class, 'store']);

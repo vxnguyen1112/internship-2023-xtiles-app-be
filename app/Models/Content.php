@@ -20,4 +20,8 @@ class Content extends Model
         'checked',
         'block_id'
     ];
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

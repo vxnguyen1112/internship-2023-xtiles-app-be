@@ -5,6 +5,7 @@
     use App\Helpers\UUID;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Support\Facades\Log;
 
     class Document extends Model
     {
@@ -20,4 +21,12 @@
             'workspace_id'
         ];
         protected $hidden = ['pivot'];
+        public function defaultPage()
+        {
+            return $this->hasOne(Page::class)->oldest()->with('blocks','blocks.contents','blocks.contents.comments');
+        }
+        public function pages()
+        {
+            return $this->hasMany(Page::class);
+        }
     }

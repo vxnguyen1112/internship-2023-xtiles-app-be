@@ -4,6 +4,7 @@
 
     use App\Models\Document;
     use App\Repositories\DocumentRepository;
+    use Illuminate\Support\Facades\Log;
     use Prettus\Repository\Criteria\RequestCriteria;
     use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -34,5 +35,18 @@
         public function deleteDocumentByWorkspace($workspace_Id)
         {
             Document::where('workspace_id', $workspace_Id)->update(['is_deleted' => true, 'workspace_id' => null]);
+        }
+
+        public function getAllDataOfDocument($idDocument)
+        {
+            $data = Document::where(['id' => $idDocument, 'is_deleted' => false])->with([
+                'pages' => function ($query) {
+                    $query->orderBy('created_at', 'asc');
+                },
+                'defaultPage'
+            ])->get()->toArray();
+            $data[0]['blocks'] = $data[0]['default_page']['blocks'];
+            unset($data[0]['default_page']);
+            return $data;
         }
     }

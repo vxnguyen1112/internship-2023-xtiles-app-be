@@ -19,4 +19,8 @@ class Block extends Model
         'is_title_hidden',
         'page_id'
     ];
+    public function contents()
+    {
+        return $this->hasMany(Content::class);
+    }
 }
