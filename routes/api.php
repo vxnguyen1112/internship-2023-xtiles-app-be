@@ -37,7 +37,8 @@ Route::group([
     }
     );
 
-    Route::get('/block', [BlockController::class, 'index']);
+    Route::get('page/{pageId}/block', [BlockController::class, 'getBlockByPage']);
+    Route::get('block/{id}', [BlockController::class, 'getBlockById']);
     Route::post('/block', [BlockController::class, 'store']);
     Route::put('/block/{id}', [BlockController::class, 'update']);
     Route::delete('/block/{id}', [BlockController::class, 'delete']);
