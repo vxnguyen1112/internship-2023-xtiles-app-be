@@ -6,18 +6,14 @@
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Model;
 
-    class Document extends Model
+    class Favourite_document extends Model
     {
         use HasFactory;
         use UUID;
 
         protected $fillable = [
-            'name',
-            'is_deleted',
-            'img_cover_url',
-            'img_panel_url',
+            'document_id',
             'account_id',
-            'workspace_id'
         ];
-        protected $hidden = ['pivot'];
+
     }

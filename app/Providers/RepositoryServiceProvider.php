@@ -8,6 +8,8 @@
     use App\Repositories\CommentRepository;
     use App\Repositories\Eloquent\CommentRepositoryEloquent;
     use App\Repositories\Eloquent\ContentRepositoryEloquent;
+    use App\Repositories\Eloquent\FavouriteDocumentRepositoryEloquent;
+    use App\Repositories\FavouriteDocumentRepository;
     use Illuminate\Support\ServiceProvider;
 
     class RepositoryServiceProvider extends ServiceProvider
@@ -50,5 +52,8 @@
             );
             $this->app->bind(\App\Repositories\ShareDocumentRepository::class,
                 \App\Repositories\Eloquent\ShareDocumentRepositoryEloquent::class);
+
+            $this->app->bind(FavouriteDocumentRepository::class,
+                FavouriteDocumentRepositoryEloquent::class);
         }
     }
