@@ -21,9 +21,17 @@
             $this->pageService = $pageService;
         }
 
-        public function getPageById($id)
+        public function getPageById(Request $request, $id)
         {
-            return ResponseHelper::send($this->pageService->getPageById($id), statusCode: HttpCode::OK);
+            if (!$request->input('all_data')) {
+                $result = $this->pageService->getPageById($id);
+            } else {
+                $result = $this->pageService->getAllDataOfPage($id);
+            }
+            if ($result === HttpCode::NOT_FOUND) {
+                return CommonResponse::notFoundResponse();
+            }
+            return ResponseHelper::send($result);
         }
 
         public function getPageByQuery(Request $request)

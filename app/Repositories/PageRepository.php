@@ -7,4 +7,5 @@
     interface PageRepository extends RepositoryInterface
     {
       public function checkPageById($id);
+      public function getAllDataOfPage($id);
     }

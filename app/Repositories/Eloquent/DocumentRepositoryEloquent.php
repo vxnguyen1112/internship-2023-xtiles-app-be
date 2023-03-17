@@ -29,7 +29,24 @@
 
         public function getDocumentPersonal($idAccount)
         {
-            return Document::where(['account_id' => $idAccount, 'is_deleted' => false])->get();
+            return Document::where(['account_id' => $idAccount, 'is_deleted' => false])->with([
+                'favourite' => function ($query) use ($idAccount) {
+                    $query->where('account_id', $idAccount);
+                }
+            ])->get()->map(function ($row) {
+                return [
+                    'id' => $row['id'],
+                    'name' => $row['name'],
+                    'is_deleted' => $row['is_deleted'],
+                    'img_cover_url' => $row['img_cover_url'],
+                    'img_panel_url' => $row['img_panel_url'],
+                    'account_id' => $row['account_id'],
+                    'workspace_id' => $row['workspace_id'],
+                    'updated_at' => $row['updated_at'],
+                    'created_at' => $row['created_at'],
+                    'favourite' => $row['favourite']->count() ? true : false
+                ];
+            });
         }
 
         public function deleteDocumentByWorkspace($workspace_Id)

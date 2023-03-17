@@ -29,4 +29,8 @@
         {
             return $this->hasMany(Page::class);
         }
+        public function favourite()
+        {
+            return $this->belongsToMany(Account::class, 'favourite_documents');
+        }
     }

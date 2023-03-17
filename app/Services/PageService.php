@@ -31,6 +31,15 @@
             return $this->pageRepository->find($id);
         }
 
+        public function getAllDataOfPage($id)
+        {
+            if (!$this->pageRepository->checkPageById($id)) {
+                return HttpCode::NOT_FOUND;
+            }
+            return $this->pageRepository->getAllDataOfPage($id);
+        }
+
+
         public function store($data)
         {
             return $this->pageRepository->create($data);
