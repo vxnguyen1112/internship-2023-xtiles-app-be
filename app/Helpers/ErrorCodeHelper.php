@@ -15,5 +15,5 @@ class ErrorCodeHelper
     public const EXISTED = 'EXISTED';
     public const MISSING = 'MISSING';
     public const ARRAY = 'ARRAY';
-    public const INACTIVE = 'INACTIVE';
+    public const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
 }

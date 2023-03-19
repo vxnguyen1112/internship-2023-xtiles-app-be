@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\DocumentController;
+use App\Http\Controllers\api\WorkspaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +63,10 @@ Route::group([
     Route::post('/comment', [CommentController::class, 'store']);
     Route::put('/comment/{id}', [CommentController::class, 'update']);
     Route::delete('/comment/{id}', [CommentController::class, 'delete']);
+
+    Route::get('/workspace', [WorkspaceController::class, 'getWorkspaceByAccountId']);
+    Route::post('/workspace', [WorkspaceController::class, 'store']);
+    Route::put('/workspace/{id}', [WorkspaceController::class, 'update']);
+    Route::delete('/workspace/{id}', [WorkspaceController::class, 'delete']);
 });
 

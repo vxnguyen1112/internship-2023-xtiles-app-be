@@ -23,11 +23,16 @@
 
         public function checkDocumentById($id)
         {
-            return Document::where(['id'=> $id,'is_deleted'=>false])->exists();
+            return Document::where(['id' => $id, 'is_deleted' => false])->exists();
         }
 
         public function getDocumentPersonal($idAccount)
         {
-            return Document::where(['account_id'=> $idAccount,'is_deleted'=>false])->get();
+            return Document::where(['account_id' => $idAccount, 'is_deleted' => false])->get();
+        }
+
+        public function deleteDocumentByWorkspace($workspace_Id)
+        {
+            Document::where('workspace_id', $workspace_Id)->update(['is_deleted' => true, 'workspace_id' => null]);
         }
     }
