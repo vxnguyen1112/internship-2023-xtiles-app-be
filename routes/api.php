@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\BlockController;
 use App\Http\Controllers\api\CommentController;
+use App\Http\Controllers\api\ContentController;
 use App\Http\Controllers\api\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -68,5 +69,11 @@ Route::group([
     Route::post('/workspace', [WorkspaceController::class, 'store']);
     Route::put('/workspace/{id}', [WorkspaceController::class, 'update']);
     Route::delete('/workspace/{id}', [WorkspaceController::class, 'delete']);
+
+    Route::get('/document/{document_id}/block/{blockId}/content', [ContentController::class, 'getContentByBlock']);
+    Route::get('/document/{document_id}/content/{id}', [ContentController::class, 'getContentById']);
+    Route::post('/document/{document_id}/content', [ContentController::class, 'store']);
+    Route::put('/document/{document_id}/content/{id}', [ContentController::class, 'update']);
+    Route::delete('/document/{document_id}/content/{id}', [ContentController::class, 'delete']);
 });
 

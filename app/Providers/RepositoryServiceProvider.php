@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Repositories\BlockRepository;
+use App\Repositories\ContentRepository;
 use App\Repositories\Eloquent\BlockRepositoryEloquent;
 use App\Repositories\CommentRepository;
-use App\Repositories\ContentRepository;
 use App\Repositories\Eloquent\CommentRepositoryEloquent;
 use App\Repositories\Eloquent\ContentRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
