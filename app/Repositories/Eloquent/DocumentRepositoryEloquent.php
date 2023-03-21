@@ -62,6 +62,11 @@
                 },
                 'defaultPage'
             ])->get()->toArray();
+            if (is_null($data[0]['default_page'])) {
+                $data[0]['blocks'] = [];
+                unset($data[0]['default_page']);
+                return $data;
+            }
             $data[0]['blocks'] = $data[0]['default_page']['blocks'];
             unset($data[0]['default_page']);
             return $data;
