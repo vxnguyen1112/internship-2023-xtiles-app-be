@@ -4,6 +4,7 @@
 
     use Prettus\Repository\Contracts\RepositoryInterface;
 
-    interface AccountRepository extends RepositoryInterface
+    interface ShareDocumentRepository extends RepositoryInterface
     {
+
     }

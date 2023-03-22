@@ -2,18 +2,20 @@
 
     namespace App\Repositories\Eloquent;
 
-    use App\Models\Account;
-    use App\Repositories\AccountRepository;
+    use App\Models\Document;
+    use App\Models\Document_account;
+    use App\Repositories\DocumentRepository;
+    use App\Repositories\ShareDocumentRepository;
     use Prettus\Repository\Criteria\RequestCriteria;
     use Prettus\Repository\Eloquent\BaseRepository;
 
 
-    class AccountRepositoryEloquent extends BaseRepository implements AccountRepository
+    class ShareDocumentRepositoryEloquent extends BaseRepository implements ShareDocumentRepository
     {
 
         public function model()
         {
-            return Account::class;
+            return Document_account::class;
         }
 
         public function boot()

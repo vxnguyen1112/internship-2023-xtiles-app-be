@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\api\BlockController;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\DocumentController;
 use App\Http\Controllers\api\WorkspaceController;
+use App\Http\Controllers\api\ShareDocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,7 @@ use App\Http\Controllers\api\WorkspaceController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::group([
     'prefix' => "auth"
 ], function () {
@@ -29,14 +32,16 @@ Route::group([
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    Route::group([
-        'prefix' => "auth"
-    ], function () {
-        Route::post('/logout', [AuthController::class, 'logout']);
-        Route::post('/refresh', [AuthController::class, 'refresh']);
-        Route::get('/user-profile', [AuthController::class, 'userProfile']);
-        Route::post('/change-pass', [AuthController::class, 'changePassWord']);
-    }
+    Route::group(
+        [
+            'prefix' => "auth"
+        ],
+        function () {
+            Route::post('/logout', [AuthController::class, 'logout']);
+            Route::post('/refresh', [AuthController::class, 'refresh']);
+            Route::get('/user-profile', [AuthController::class, 'userProfile']);
+            Route::post('/change-pass', [AuthController::class, 'changePassWord']);
+        }
     );
 
     Route::get('page/{pageId}/block', [BlockController::class, 'getBlockByPage']);
@@ -75,5 +80,7 @@ Route::group([
     Route::post('/document/{document_id}/content', [ContentController::class, 'store']);
     Route::put('/document/{document_id}/content/{id}', [ContentController::class, 'update']);
     Route::delete('/document/{document_id}/content/{id}', [ContentController::class, 'delete']);
-});
 
+    Route::post('/document/{document_id}/share', [ShareDocumentController::class, 'index']);
+    Route::post('/document/accept', [ShareDocumentController::class, 'acceptInvite']);
+});

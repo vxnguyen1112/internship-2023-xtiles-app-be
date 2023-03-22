@@ -9,7 +9,7 @@
     use Illuminate\Notifications\Notifiable;
     use Tymon\JWTAuth\Contracts\JWTSubject;
 
-    class Account  extends Authenticatable  implements JWTSubject
+    class Account extends Authenticatable implements JWTSubject
     {
         use  HasFactory, Notifiable;
         use UUID;
@@ -18,8 +18,8 @@
             'name',
             'email',
             'password',
-            'avatar_url'
-
+            'avatar_url',
+            'is_verified'
         ];
         protected $hidden = [
             'password'
