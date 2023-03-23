@@ -76,4 +76,12 @@ class CommonResponse
             HttpCode::NOT_FOUND,
             ErrorCodeHelper::ROUTE_NOT_FOUND);
     }
+    public static function Unauthorized()
+    {
+        return ResponseHelper::send(
+            [],
+            Status::NOT_GOOD,
+            HttpCode::UNAUTHORIZED,
+            ErrorCodeHelper::UNAUTHORIZED);
+    }
 }
