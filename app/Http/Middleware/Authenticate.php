@@ -21,6 +21,6 @@ class Authenticate extends Middleware
     }
     protected function unauthenticated($request, array $guards)
     {
-        abort(CommonResponse::forbiddenResponse());
+        abort(CommonResponse::Unauthorized());
     }
 }
