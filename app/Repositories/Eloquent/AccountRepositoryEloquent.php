@@ -21,4 +21,8 @@
             $this->pushCriteria(app(RequestCriteria::class));
         }
 
+        public function getAllFavouriteOfAccount($id)
+        {
+            return Account::where(['id' => $id])->with('favouriteDocument')->get();
+        }
     }

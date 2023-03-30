@@ -34,4 +34,9 @@
         {
             return [];
         }
+
+        public function favouriteDocument()
+        {
+            return $this->belongsToMany(Document::class, 'favourite_documents');
+        }
     }

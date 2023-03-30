@@ -4,12 +4,12 @@
     use App\Http\Controllers\api\CommentController;
     use App\Http\Controllers\api\ContentController;
     use App\Http\Controllers\api\PageController;
-    use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\api\AuthController;
     use App\Http\Controllers\api\DocumentController;
     use App\Http\Controllers\api\WorkspaceController;
     use App\Http\Controllers\api\ShareDocumentController;
+    use App\Http\Controllers\api\FavouriteDocumentController;
 
     /*
     |--------------------------------------------------------------------------
@@ -48,6 +48,7 @@
 
         Route::get('/document', [DocumentController::class, 'getDocumentByQuery']);
         Route::get('/document/personal', [DocumentController::class, 'getDocumentPersonal']);
+        Route::get('/document/favourite', [FavouriteDocumentController::class, 'getAllFavouriteOfAccount']);
         Route::get('/document/{id}', [DocumentController::class, 'getDocumentById']);
         Route::post('/document', [DocumentController::class, 'store']);
         Route::put('/document/{id}', [DocumentController::class, 'update']);
@@ -79,4 +80,6 @@
 
         Route::post('/document/{document_id}/share', [ShareDocumentController::class, 'index']);
         Route::post('/document/accept', [ShareDocumentController::class, 'acceptInvite']);
+
+        Route::post('/document/{document_id}/favourite', [FavouriteDocumentController::class, 'store']);
     });
