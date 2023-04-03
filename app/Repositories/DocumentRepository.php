@@ -11,4 +11,6 @@
         public function getDocumentPersonal($idAccount);
 
         public function deleteDocumentByWorkspace($workspace_Id);
+
+        public function getAllDataOfDocument($idDocument);
     }

@@ -15,5 +15,8 @@
             'name',
             'document_id'
         ];
-
+        public function blocks()
+        {
+            return $this->hasMany(Block::class);
+        }
     }

@@ -23,19 +23,31 @@ class DocumentController extends Controller
 
     public function getDocumentPersonal()
     {
-        return ResponseHelper::send($this->documentService->getDocumentPersonal(), statusCode: HttpCode::CREATED);
+        return ResponseHelper::send($this->documentService->getDocumentPersonal());
     }
 
     public function getDocumentByQuery(Request $request)
     {
         $query = $request->only(['name', 'is_deleted', 'workspace_id']);
-        return ResponseHelper::send($this->documentService->getDocumentByQuery($query),
-            statusCode: HttpCode::CREATED);
+        return ResponseHelper::send($this->documentService->getDocumentByQuery($query));
     }
 
     public function getDocumentById($id)
     {
-        return ResponseHelper::send($this->documentService->getDocumentById($id), statusCode: HttpCode::CREATED);
+        $result = $this->documentService->getDocumentById($id);
+        if ($result === HttpCode::NOT_FOUND) {
+            return CommonResponse::notFoundResponse();
+        }
+        return ResponseHelper::send($result);
+    }
+
+    public function getAllDataDocument($id)
+    {
+        $result = $this->documentService->getAllDataOfDocument($id);
+        if ($result === HttpCode::NOT_FOUND) {
+            return CommonResponse::notFoundResponse();
+        }
+        return ResponseHelper::send($result);
     }
 
     public function store(StoreDocumentRequest $request)
