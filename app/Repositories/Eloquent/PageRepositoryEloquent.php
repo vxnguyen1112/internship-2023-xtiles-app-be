@@ -24,4 +24,9 @@
         {
             return Page::where('id', $id)->exists();
         }
+
+        public function getAllDataOfPage($id)
+        {
+            return Page::where('id',$id)->with('blocks','blocks.contents','blocks.contents.comments')->get();
+        }
     }
