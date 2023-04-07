@@ -10,6 +10,7 @@
     use App\Http\Controllers\api\WorkspaceController;
     use App\Http\Controllers\api\ShareDocumentController;
     use App\Http\Controllers\api\FavouriteDocumentController;
+    use App\Http\Controllers\api\UploadController;
 
     /*
     |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@
         Route::get('/document/personal', [DocumentController::class, 'getDocumentPersonal']);
         Route::post('/document', [DocumentController::class, 'store']);
 
+        Route::post('/document/accept', [ShareDocumentController::class, 'acceptInvite']);
+
         Route::get('/workspace', [WorkspaceController::class, 'getWorkspaceByAccountId']);
         Route::post('/workspace', [WorkspaceController::class, 'store']);
         Route::put('/workspace/{id}', [WorkspaceController::class, 'update']);
@@ -75,7 +78,7 @@
             Route::delete('/document/{document_id}/page/{id}', [PageController::class, 'destroy']);
 
             Route::get('/document/{document_id}/comment/{id}', [CommentController::class, 'getCommentById']);
-            Route::get('/document/{document_id}/document/{document_id}/comment', [CommentController::class, 'getCommentByDocument']);
+            Route::get('/document/{document_id}/comment', [CommentController::class, 'getCommentByDocument']);
             Route::get('/document/{document_id}/content/{contentId}/comment', [CommentController::class, 'getCommentByContent']);
             Route::post('/document/{document_id}/comment', [CommentController::class, 'store']);
             Route::put('/document/{document_id}/comment/{id}', [CommentController::class, 'update']);
@@ -88,6 +91,8 @@
             Route::delete('/document/{document_id}/content/{id}', [ContentController::class, 'delete']);
 
             Route::post('/document/{document_id}/share', [ShareDocumentController::class, 'index']);
-            Route::post('/document/accept', [ShareDocumentController::class, 'acceptInvite']);
+
+            Route::post('/document/{document_id}/content/upload', [UploadController::class, 'uploadToContent']);
+            Route::post('/document/{document_id}/content/{content_id}/upload', [UploadController::class, 'updateContent']);
         });
     });
