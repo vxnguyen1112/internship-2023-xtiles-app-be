@@ -23,10 +23,17 @@
             'public_id'
         ];
 
-        protected $hidden = ['public_id'];
+        protected $hidden = ['public_id', 'block'];
 
         public function comments()
         {
             return $this->hasMany(Comment::class);
+        }
+
+        protected $touches = ['block'];
+
+        public function block()
+        {
+            return $this->belongsTo(Block::class);
         }
     }

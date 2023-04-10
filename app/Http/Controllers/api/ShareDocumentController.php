@@ -10,6 +10,7 @@
     use App\Http\Requests\StoreShareDocumentRequest;
     use App\Jobs\SendEmail;
     use App\Mail\InviteJoinDocument;
+    use App\Services\NotificationService;
     use App\Services\ShareDocumentService;
     use Carbon\Carbon;
     use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -24,11 +25,17 @@
     class ShareDocumentController extends Controller
     {
         protected $shareDocumentService;
+        protected $notificationService;
 
-        public function __construct(ShareDocumentService $shareDocumentService)
-        {
+
+        public function __construct(
+            ShareDocumentService $shareDocumentService,
+            NotificationService $notificationService
+        ) {
             $this->shareDocumentService = $shareDocumentService;
+            $this->notificationService = $notificationService;
         }
+
 
         public function index(StoreShareDocumentRequest $request)
         {
@@ -93,4 +100,15 @@
             }
             return ResponseHelper::send($result);
         }
+
+        public function getNotification()
+        {
+            return ResponseHelper::send($this->notificationService->getNotification());
+        }
+
+        public function checkNotification()
+        {
+            return ResponseHelper::send($this->notificationService->checkNotification());
+        }
+
     }

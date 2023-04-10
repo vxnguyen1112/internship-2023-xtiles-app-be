@@ -45,6 +45,8 @@
         );
         Route::post('/document/{document_id}/favourite', [FavouriteDocumentController::class, 'store']);
         Route::get('/document/share', [ShareDocumentController::class, 'getAllDocumentShareOfAccount']);
+        Route::get('/notification', [ShareDocumentController::class, 'getNotification']);
+        Route::get('/notification/check', [ShareDocumentController::class, 'checkNotification']);
         Route::get('/document/{document_id}/role', [ShareDocumentController::class, 'getListRoleShare']);
         Route::get('/document/favourite', [FavouriteDocumentController::class, 'getAllFavouriteOfAccount']);
         Route::get('/document', [DocumentController::class, 'getDocumentByQuery']);

@@ -29,11 +29,11 @@
 
         public function getDocumentPersonal($idAccount)
         {
-            return Document::where(['account_id' => $idAccount, 'is_deleted' => false])->with([
+            return Document::where(['account_id' => $idAccount, 'is_deleted' => false, 'workspace_id' => null])->with([
                 'favourite' => function ($query) use ($idAccount) {
                     $query->where('account_id', $idAccount);
                 }
-            ])->get()->map(function ($row) {
+            ])->latest('updated_at')->get()->map(function ($row) {
                 return [
                     'id' => $row['id'],
                     'name' => $row['name'],
@@ -84,6 +84,7 @@
                     'document_accounts.id as id',
                     'document_accounts.role',
                     'accounts.email',
+                    'document_accounts.is_accepted'
                 ])
                 ->get()
                 ->map(function ($row) {
@@ -91,6 +92,7 @@
                         'id' => $row['id'],
                         'role' => $row['role'],
                         'email' => $row['email'],
+                        'is_accepted'=>$row['is_accepted']
                     ];
                 }
                 )->toArray();

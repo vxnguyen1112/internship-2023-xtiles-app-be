@@ -9,7 +9,9 @@
     use App\Repositories\Eloquent\CommentRepositoryEloquent;
     use App\Repositories\Eloquent\ContentRepositoryEloquent;
     use App\Repositories\Eloquent\FavouriteDocumentRepositoryEloquent;
+    use App\Repositories\Eloquent\NotificationReponsitoryEloquent;
     use App\Repositories\FavouriteDocumentRepository;
+    use App\Repositories\NotificationReponsitory;
     use Illuminate\Support\ServiceProvider;
 
     class RepositoryServiceProvider extends ServiceProvider
@@ -55,5 +57,8 @@
 
             $this->app->bind(FavouriteDocumentRepository::class,
                 FavouriteDocumentRepositoryEloquent::class);
+
+            $this->app->bind(NotificationReponsitory::class,
+                NotificationReponsitoryEloquent::class);
         }
     }
