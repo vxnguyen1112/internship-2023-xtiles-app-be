@@ -34,6 +34,12 @@
                 'document_id' => 'required|string|exists:documents,id'
             ];
         }
+        public function all($keys = null)
+        {
+            $data = parent::all($keys);
+            $data['document_id'] = $this->route('document_id');
+            return $data;
+        }
         protected function failedValidation(Validator $validator)
         {
             $validator_errors = (new ValidationException($validator))->errors();

@@ -29,18 +29,18 @@ class CommentController extends Controller
         return ResponseHelper::send($result);
     }
 
-    public function getCommentByDocument($documentId)
+    public function getCommentByDocument($document_id)
     {
-        $result = $this->commentService->getCommentByDocument($documentId);
+        $result = $this->commentService->getCommentByDocument($document_id);
         if (is_null($result)) {
             return CommonResponse::notFoundResponse();
         }
         return ResponseHelper::send($result);
     }
 
-    public function getCommentByContent($contentId)
+    public function getCommentByContent(Request $request)
     {
-        $result = $this->commentService->getCommentByContent($contentId);
+        $result = $this->commentService->getCommentByContent($request['contentId']);
         if (is_null($result)) {
             return CommonResponse::notFoundResponse();
         }
@@ -53,18 +53,18 @@ class CommentController extends Controller
         return ResponseHelper::send($result, statusCode: HttpCode::CREATED);
     }
 
-    public function update(StoreCommentRequest $request, $id)
+    public function update(StoreCommentRequest $request)
     {
-        $result = $this->commentService->update($request->all(), $id);
+        $result = $this->commentService->update($request->all(),$request['id']);
         if (is_null($result)) {
             return CommonResponse::notFoundResponse();
         }
         return ResponseHelper::send($result, statusCode: HttpCode::CREATED);
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $result = $this->commentService->delete($id);
+        $result = $this->commentService->delete($request['id']);
         if (is_null($result)) {
             return CommonResponse::notFoundResponse();
         }

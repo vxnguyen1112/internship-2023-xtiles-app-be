@@ -11,6 +11,7 @@
     use App\Services\PageService;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Log;
+    use Psy\Readline\Hoa\Console;
 
     class PageController extends Controller
     {
@@ -46,18 +47,18 @@
             return ResponseHelper::send($result, statusCode: HttpCode::CREATED);
         }
 
-        public function update(Request $request, $id)
+        public function update(Request $request)
         {
-            $result = $this->pageService->update($request->except('document_id'), $id);
+            $result = $this->pageService->update($request->except('document_id'), $request['id']);
             if ($result === HttpCode::NOT_FOUND) {
                 return CommonResponse::notFoundResponse();
             }
             return ResponseHelper::send($result, statusCode: HttpCode::OK);
         }
 
-        public function destroy($id)
+        public function destroy(Request $request)
         {
-            $result = $this->pageService->delete($id);
+            $result = $this->pageService->delete($request['id']);
             if ($result === HttpCode::NOT_FOUND) {
                 return CommonResponse::notFoundResponse();
             }
