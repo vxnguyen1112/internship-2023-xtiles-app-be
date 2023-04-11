@@ -22,12 +22,13 @@
             $this->pageService = $pageService;
         }
 
-        public function getPageById(Request $request, $id)
+        public function getPageById(Request $request)
         {
+            $idPage = $request['id'];
             if (!$request->input('all_data')) {
-                $result = $this->pageService->getPageById($id);
+                $result = $this->pageService->getPageById($idPage);
             } else {
-                $result = $this->pageService->getAllDataOfPage($id);
+                $result = $this->pageService->getAllDataOfPage($idPage);
             }
             if ($result === HttpCode::NOT_FOUND) {
                 return CommonResponse::notFoundResponse();
