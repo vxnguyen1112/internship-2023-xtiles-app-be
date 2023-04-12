@@ -43,7 +43,7 @@
             $now = new \DateTime();
             $mailData = [
                 'title' => 'Mail from Work Central',
-                'body' => $request['email'] . ' invited you to join the document',
+                'body' => auth()->user()['email'] . ' invited you to join the document',
                 'expires_in' => $now->add(new \DateInterval('PT168H')),
                 'id' => $result['id'],
                 'account_id' => $result['account_id']
@@ -73,5 +73,24 @@
                 Log::error($e);
                 return CommonResponse::unknownResponse();
             }
+        }
+
+        public function getAllDocumentShareOfAccount()
+        {
+            return ResponseHelper::send($this->shareDocumentService->getAllDocumentShareOfAccount());
+        }
+
+        public function getListRoleShare($id)
+        {
+            return ResponseHelper::send($this->shareDocumentService->getListRoleShare($id));
+        }
+
+        public function update(Request $request, $id)
+        {
+            $result = $this->shareDocumentService->update($request->only(['role']), $id);
+            if ($result === HttpCode::NOT_FOUND) {
+                return CommonResponse::notFoundResponse();
+            }
+            return ResponseHelper::send($result);
         }
     }

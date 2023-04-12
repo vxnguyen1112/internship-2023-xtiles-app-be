@@ -33,8 +33,9 @@
 
         public function getAllFavouriteOfAccount()
         {
-            Log::error(auth()->user()['id']);
-            return $this->accountRepository->getAllFavouriteOfAccount(auth()->user()['id']);
+            $accountId = auth()->user()['id'];
+            $result = $this->accountRepository->getAllFavouriteOfAccount($accountId)->toArray();
+            return $result[0]['favourite_document'];
         }
 
         public function store($data)

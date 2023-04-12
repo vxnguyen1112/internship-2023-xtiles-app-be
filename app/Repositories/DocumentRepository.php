@@ -13,4 +13,6 @@
         public function deleteDocumentByWorkspace($workspace_Id);
 
         public function getAllDataOfDocument($idDocument);
+
+        public function getListRoleShare($account_id);
     }

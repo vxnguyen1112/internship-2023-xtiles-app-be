@@ -62,10 +62,15 @@
             if (!$this->documentRepository->checkDocumentById($id)) {
                 return HttpCode::NOT_FOUND;
             }
+            $account_id = auth()->user()['id'];
             $data = $this->documentRepository->getAllDataOfDocument($id);
             $data['is_favourite'] = !is_null($this->favouriteDocumentRepository->findWhere([
-                'account_id' => auth()->user()['id'],
+                'account_id' => $account_id,
                 'document_id' => $id
+            ])->first());
+            $data['is_owner'] = !is_null($this->documentRepository->findWhere([
+                'id' => $id,
+                'account_id' => $account_id
             ])->first());
             return $data;
         }

@@ -8,4 +8,6 @@
     interface AccountRepository extends RepositoryInterface
     {
         public function getAllFavouriteOfAccount($id);
+
+        public function getAllDocumentShareOfAccount($id);
     }
