@@ -71,4 +71,42 @@
             unset($data[0]['default_page']);
             return $data;
         }
+
+        public function getListRoleShare($document_id)
+        {
+            $result = Document::join('document_accounts', 'documents.id', '=', 'document_accounts.document_id')
+                ->join('accounts', 'document_accounts.account_id', '=', 'accounts.id')
+                ->where([
+                    'documents.id' => $document_id,
+                    'is_deleted' => false,
+                ])
+                ->select([
+                    'document_accounts.id as id',
+                    'document_accounts.role',
+                    'accounts.email',
+                ])
+                ->get()
+                ->map(function ($row) {
+                    return [
+                        'id' => $row['id'],
+                        'role' => $row['role'],
+                        'email' => $row['email'],
+                    ];
+                }
+                )->toArray();
+            $owner = Document::join('accounts', 'documents.account_id', '=', 'accounts.id')
+                ->where([
+                    'documents.id' => $document_id,
+                    'is_deleted' => false
+                ])->get()
+                ->map(function ($row) {
+                    return [
+                        'id' => null,
+                        'role' => 'OWNER',
+                        'email' => $row['email'],
+                    ];
+                })->toArray();
+            return array_merge($owner, $result);
+        }
+
     }

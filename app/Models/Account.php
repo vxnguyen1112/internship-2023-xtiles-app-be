@@ -39,4 +39,9 @@
         {
             return $this->belongsToMany(Document::class, 'favourite_documents');
         }
+
+        public function shareDocument()
+        {
+            return $this->belongsToMany(Document::class, 'document_accounts');
+        }
     }

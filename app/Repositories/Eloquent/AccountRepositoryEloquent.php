@@ -23,6 +23,19 @@
 
         public function getAllFavouriteOfAccount($id)
         {
-            return Account::where(['id' => $id])->with('favouriteDocument')->get();
+            return Account::where(['id' => $id])->with([
+                'favouriteDocument' => function ($query) {
+                    $query->where('is_deleted', false);
+                }
+            ])->get();
+        }
+
+        public function getAllDocumentShareOfAccount($id)
+        {
+            return Account::where(['id' => $id])->with([
+                'shareDocument' => function ($query) {
+                    $query->where('is_accepted', true);
+                }
+            ])->get();
         }
     }

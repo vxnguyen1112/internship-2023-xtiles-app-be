@@ -94,4 +94,25 @@
         {
             return $this->shareDocumentRepository->update($role, $id);
         }
+
+        public function getAllDocumentShareOfAccount()
+        {
+            $accountId = auth()->user()['id'];
+            $result = $this->accountRepository->getAllDocumentShareOfAccount($accountId)->toArray();
+            return $result[0]['share_document'];
+        }
+
+        public function getListRoleShare($id)
+        {
+            return $this->documentRepository->getListRoleShare($id);
+        }
+
+        public function update($data, $id)
+        {
+            $documentShare = $this->shareDocumentRepository->findWhere(['id' => $id])->first();
+            if (is_null($documentShare)) {
+                return HttpCode::NOT_FOUND;
+            }
+            return $this->shareDocumentRepository->update($data, $id);
+        }
     }
