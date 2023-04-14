@@ -99,6 +99,9 @@
         {
             $accountId = auth()->user()['id'];
             $result = $this->accountRepository->getAllDocumentShareOfAccount($accountId)->toArray();
+            foreach ($result[0]['share_document'] as &$item) {
+                $item['favourite'] = boolval($item['favourite']);
+            }
             return $result[0]['share_document'];
         }
 
@@ -114,5 +117,14 @@
                 return HttpCode::NOT_FOUND;
             }
             return $this->shareDocumentRepository->update($data, $id);
+        }
+
+        public function delete($id)
+        {
+            $shareDoc = $this->shareDocumentRepository->findWhere(['id' => $id])->first();
+            if (is_null($shareDoc)) {
+                return HttpCode::NOT_FOUND;
+            }
+            return $this->shareDocumentRepository->delete($id);
         }
     }

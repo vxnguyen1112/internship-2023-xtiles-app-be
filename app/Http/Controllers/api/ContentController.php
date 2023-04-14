@@ -21,7 +21,7 @@ class ContentController extends Controller
 
     public function getContentByBlock(Request $request)
     {
-        $result = $this->contentService->getContentByBlock($request['id']);
+        $result = $this->contentService->getContentByBlock($request['blockId']);
         if (is_null($result)) {
             return CommonResponse::notFoundResponse();
         }

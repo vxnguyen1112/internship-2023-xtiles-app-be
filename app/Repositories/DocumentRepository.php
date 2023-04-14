@@ -15,4 +15,6 @@
         public function getAllDataOfDocument($idDocument);
 
         public function getListRoleShare($account_id);
+
+        public function getDocumentByQuery($query);
     }

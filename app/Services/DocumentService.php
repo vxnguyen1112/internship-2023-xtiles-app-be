@@ -83,7 +83,7 @@
                 array_push($query, ['name', 'like', '%' . addslashes($query['name']) . '%']);
                 unset($query['name']);
             }
-            return $this->documentRepository->findWhere($query);
+            return $this->documentRepository->getDocumentByQuery($query);
         }
 
         public function getDocumentById($id)

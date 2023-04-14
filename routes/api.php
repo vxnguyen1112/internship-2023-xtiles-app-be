@@ -11,6 +11,7 @@
     use App\Http\Controllers\api\ShareDocumentController;
     use App\Http\Controllers\api\FavouriteDocumentController;
     use App\Http\Controllers\api\UploadController;
+    use App\Http\Controllers\api\SendEventController;
 
     /*
     |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@
                 Route::post('/change-pass', [AuthController::class, 'changePassWord']);
             }
         );
+        Route::post('/send', [SendEventController::class, 'sendEvent']);
         Route::post('/document/{document_id}/favourite', [FavouriteDocumentController::class, 'store']);
         Route::get('/document/share', [ShareDocumentController::class, 'getAllDocumentShareOfAccount']);
         Route::get('/notification', [ShareDocumentController::class, 'getNotification']);
@@ -69,6 +71,7 @@
             Route::get('/document/{document_id}/block/{id}', [BlockController::class, 'getBlockById']);
             Route::post('/document/{document_id}/block', [BlockController::class, 'store']);
             Route::put('/document/{document_id}/block/{id}', [BlockController::class, 'update']);
+            Route::put('/document/{document_id}/block', [BlockController::class, 'updateList']);
             Route::delete('/document/{document_id}/block/{id}', [BlockController::class, 'delete']);
 
             Route::get('/document/{document_id}', [DocumentController::class, 'getDocumentById']);
@@ -96,6 +99,7 @@
             Route::delete('/document/{document_id}/content/{id}', [ContentController::class, 'delete']);
 
             Route::post('/document/{document_id}/share', [ShareDocumentController::class, 'index']);
+            Route::delete('/document/{document_id}/share/{id}', [ShareDocumentController::class, 'destroy']);
 
             Route::post('/document/{document_id}/content/upload', [UploadController::class, 'uploadToContent']);
             Route::post('/document/{document_id}/content/{content_id}/upload', [UploadController::class, 'updateContent']);

@@ -92,7 +92,7 @@
                         'id' => $row['id'],
                         'role' => $row['role'],
                         'email' => $row['email'],
-                        'is_accepted'=>$row['is_accepted']
+                        'is_accepted' => $row['is_accepted']
                     ];
                 }
                 )->toArray();
@@ -111,4 +111,25 @@
             return array_merge($owner, $result);
         }
 
+        public function getDocumentByQuery($params)
+        {
+            return Document::where($params)->with([
+                'favourite' => function ($query) use ($params) {
+                    $query->where('account_id', $params['account_id']);
+                }
+            ])->latest('updated_at')->get()->map(function ($row) {
+                return [
+                    'id' => $row['id'],
+                    'name' => $row['name'],
+                    'is_deleted' => $row['is_deleted'],
+                    'img_cover_url' => $row['img_cover_url'],
+                    'img_panel_url' => $row['img_panel_url'],
+                    'account_id' => $row['account_id'],
+                    'workspace_id' => $row['workspace_id'],
+                    'updated_at' => $row['updated_at'],
+                    'created_at' => $row['created_at'],
+                    'favourite' => $row['favourite']->count() ? true : false
+                ];
+            });
+        }
     }

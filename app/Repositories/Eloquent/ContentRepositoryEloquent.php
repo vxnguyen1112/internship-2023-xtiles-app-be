@@ -29,6 +29,6 @@ class ContentRepositoryEloquent extends BaseRepository implements ContentReposit
 
     public function getContentByBlock($blockId)
     {
-        return Content::where('block_id', $blockId)->get();
+        return Content::where('block_id', $blockId)->oldest()->get();
     }
 }

@@ -22,11 +22,11 @@
 
         public function contents()
         {
-            return $this->hasMany(Content::class);
+            return $this->hasMany(Content::class)->oldest();
         }
 
         protected $hidden = ['page'];
-        protected $touches = ['page.document'];
+        protected $touches = ['page'];
 
         public function page()
         {

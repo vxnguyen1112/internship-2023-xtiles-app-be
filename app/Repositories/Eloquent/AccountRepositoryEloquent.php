@@ -4,6 +4,7 @@
 
     use App\Models\Account;
     use App\Repositories\AccountRepository;
+    use Illuminate\Support\Facades\Log;
     use Prettus\Repository\Criteria\RequestCriteria;
     use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -35,6 +36,9 @@
             return Account::where(['id' => $id])->with([
                 'shareDocument' => function ($query) {
                     $query->where('is_accepted', true);
+                },
+                'shareDocument.favourite' => function ($query) use ($id) {
+                    $query->where('account_id', $id);
                 }
             ])->get();
         }

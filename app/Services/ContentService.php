@@ -29,7 +29,7 @@
 
         public function getContentByBlock($blockId)
         {
-            $isExist = $this->blockRepository->checkBlockById($blockId);
+            $isExist = $this->blockRepository->checkBlockId($blockId);
             if (!$isExist) {
                 return;
             }
