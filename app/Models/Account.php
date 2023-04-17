@@ -37,7 +37,7 @@
 
         public function favouriteDocument()
         {
-            return $this->belongsToMany(Document::class, 'favourite_documents');
+            return $this->belongsToMany(Document::class, 'favourite_documents')->latest('updated_at');
         }
 
         public function shareDocument()
