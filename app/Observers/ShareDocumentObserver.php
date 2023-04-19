@@ -3,6 +3,7 @@
     namespace App\Observers;
 
     use App\Events\Event;
+    use App\Helpers\Permission;
     use App\Models\Document_account;
     use App\Services\DocumentService;
     use App\Services\NotificationService;
@@ -32,14 +33,14 @@
             $email = auth()->user()['email'];
             $account_id = auth()->user()['id'];
             $nameDocument = $this->documentService->getDocumentById($document_account['document_id'])[0]['name'];
-            $description = $email . ' invited you to ' . $nameDocument . '  as ' . $document_account['role'] . ' please check mail.';
+            $description = "<b class='text-mail'>" . $email . "</b> <br>invited you to <b class='text-document'>" . $nameDocument . "</b> as <b class='text-permission' >" . Permission::getRole($document_account['role']) . "</b >. Please check mail.";
             $data = [
                 'description' => $description,
                 'document_id' => $document_account['document_id'],
                 'account_id' => $document_account['account_id']
             ];
             $result = $this->notificationService->store($data);
-            event($this->shareEvent->create('share-document', $this->shareEvent->object, $account_id, $result));
+            event($this->shareEvent->create('share-document', $account_id, $result));
         }
 
     }

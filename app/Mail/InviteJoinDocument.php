@@ -32,7 +32,7 @@
          */
         public function build()
         {
-            return $this->subject('Mail from WorkCentral.com')
+            return $this->subject('Mail from Gutta.com')
                 ->view('emails.InviteJoinDocument');
         }
     }

@@ -14,6 +14,7 @@
         use Dispatchable, InteractsWithSockets, SerializesModels;
 
         public $message;
+
         public $id;
         public $object;
 
@@ -25,7 +26,7 @@
         /**
          * Create a new event instance.
          */
-        public function create($action, $object, $id, $data)
+        public function create($action, $id, $data)
         {
             $this->message = [
                 'event' => "{$action}",
