@@ -35,7 +35,7 @@
         {
             return Account::where(['id' => $id])->with([
                 'shareDocument' => function ($query) {
-                    $query->where('is_accepted', true);
+                    $query->where(['is_accepted' => true, 'is_deleted' => false]);
                 },
                 'shareDocument.favourite' => function ($query) use ($id) {
                     $query->where('account_id', $id);
