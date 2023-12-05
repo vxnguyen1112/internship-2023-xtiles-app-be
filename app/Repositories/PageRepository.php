@@ -1,0 +1,11 @@
+<?php
+
+    namespace App\Repositories;
+
+    use Prettus\Repository\Contracts\RepositoryInterface;
+
+    interface PageRepository extends RepositoryInterface
+    {
+      public function checkPageById($id);
+      public function getAllDataOfPage($id);
+    }
